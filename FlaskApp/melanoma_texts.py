@@ -6,9 +6,10 @@ from flask import render_template
 import os
 from shutil import copyfileobj
 import requests
+import send_sms
 ACCOUNT_SID = "ACa9cf21438e147f669df6f794d7000122" 
 AUTH_TOKEN = "5e3825edd333abc5fa4e094fba22c989"
-
+#th convnet.lua --cp cp_name --img img_name evalPic
 #convnet.lua
 #.t7
 app = Flask(__name__)
@@ -26,7 +27,7 @@ def reply():
 			extension = '.jpeg'
 		elif mediatype[6:] == 'png':
 			extension = '.png'
-		path = os.path.realpath('../conv/') + "/" + str(number) + extension
+		path = os.path.realpath('../conv/images/') + "/" + str(number) + extension
 		print(path)
 		resp = twilio.twiml.Response()
 		try:
@@ -36,6 +37,8 @@ def reply():
 					image.raw.decode_content = True
 					copyfileobj(image.raw, f)
 			resp.message("Your image has been received and is being analyzed. You will receive a response shortly.")
+			print("+" + number)
+			send_sms.sendMessage(0.5, "+" + number)
 			return str(resp)
 		except IOError:
 			resp.message("An error occured when processing your image. Please try again")
