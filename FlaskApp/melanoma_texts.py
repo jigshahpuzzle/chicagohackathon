@@ -4,7 +4,8 @@ from flask import Flask, request, redirect, send_from_directory
 from subprocess import check_output
 from flask import render_template
 import os
-from urllib import urlretrieve
+from shutil import copyfileobj
+import requests
 ACCOUNT_SID = "ACa9cf21438e147f669df6f794d7000122" 
 AUTH_TOKEN = "5e3825edd333abc5fa4e094fba22c989"
 
@@ -20,14 +21,20 @@ def reply():
 	mediatype = request.values.get('MediaContentType0',None)
 	if (nmedia > 0) & (mediatype[0:5] == 'image'):
 		url = request.values.get('MediaUrl0', None)
+		print(url)
 		if mediatype[6:] == 'jpeg':
 			extension = '.jpeg'
 		elif mediatype[6:] == 'png':
 			extension = '.png'
-		path = os.path.realpath('../conv/')
+		path = os.path.realpath('../conv/') + "/" + str(number) + extension
+		print(path)
 		resp = twilio.twiml.Response()
 		try:
-			urlretrieve(url, path + str(number) + extension)
+			image = requests.get(url, stream = True)
+			if image.status_code == 200:
+				with open(path, 'wb') as f:
+					image.raw.decode_content = True
+					copyfileobj(image.raw, f)
 			resp.message("Your image has been received and is being analyzed. You will receive a response shortly.")
 			return str(resp)
 		except IOError:
