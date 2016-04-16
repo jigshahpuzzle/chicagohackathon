@@ -1,2 +1,2 @@
 # chicagohackathon
-Melenoma Detection Neural Net
+Melanoma Detection Neural Net
