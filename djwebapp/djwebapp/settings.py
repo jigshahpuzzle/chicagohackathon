@@ -28,6 +28,12 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+# Twilio Authentication 
+
+TWILIO_ACCOUNT_SID = "ACa9cf21438e147f669df6f794d7000122"
+TWILIO_AUTH_TOKEN = "5e3825edd333abc5fa4e094fba22c989"
+
+
 # Application definition
 
 INSTALLED_APPS = (
@@ -37,6 +43,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_twilio',
 )
 
 MIDDLEWARE_CLASSES = (
