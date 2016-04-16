@@ -1,3 +1,4 @@
+# Requires pip install Pillow
 import PIL
 from PIL import Image
 
