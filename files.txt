@@ -1,0 +1,8 @@
+protos
+opt
+train_losses
+val_loss
+val_losses
+i
+epoch
+loader.vocab_mapping
