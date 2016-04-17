@@ -1,6 +1,7 @@
 from twilio.rest import TwilioRestClient
 
 def sendMessage(confidence_score, phone_number): 
+	confidence_score = float(confidence_score)
 	account_sid = "ACa9cf21438e147f669df6f794d7000122"
 	auth_token = "5e3825edd333abc5fa4e094fba22c989"
 	client = TwilioRestClient(account_sid, auth_token)
