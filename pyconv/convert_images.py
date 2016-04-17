@@ -18,7 +18,7 @@ if __name__ == "__main__":
 				train = item.split("\n")
 			if n == 1:
 				test = item.split("\n")
-			if n == 2: 
+			if n == 2:
 				validate = item.split("\n")
 		print train
 		print test
@@ -27,7 +27,7 @@ if __name__ == "__main__":
 
 	my_x = []
 	my_y = []
-	for item in train: 
+	for item in train:
 		if item:
 			im = Image.open("skin_data/" + item).convert('L')
 			pixels = list(im.getdata())
@@ -39,9 +39,9 @@ if __name__ == "__main__":
 					pixels2.append(num)
 
 			my_x.append(pixels2)
-			if "mmdermis" in item or "mmdermquest" in item: 
+			if "mmdermis" in item or "mmdermquest" in item:
 				my_y.append([0])
-			else: 
+			else:
 				my_y.append([1])
 
 
@@ -55,7 +55,7 @@ if __name__ == "__main__":
 
 	my_x = []
 	my_y = []
-	for item in validate: 
+	for item in validate:
 		if item:
 			im = Image.open("skin_data/" + item).convert('L')
 			pixels = list(im.getdata())
@@ -67,22 +67,22 @@ if __name__ == "__main__":
 					pixels2.append(num)
 
 			my_x.append(pixels2)
-			if "mmdermis" in item or "mmdermquest" in item: 
+			if "mmdermis" in item or "mmdermquest" in item:
 				my_y.append([0])
-			else: 
+			else:
 				my_y.append([1])
 
 	valid_set_x = theano.shared(numpy.array(my_x, dtype='float64'))
 	valid_set_y = theano.shared(numpy.array(my_y, dtype='float64'))
 
 	f = file('valid_set.pkl', 'wb')
-	    cPickle.dump((valid_set_x, valid_set_y), f, protocol=cPickle.HIGHEST_PROTOCOL)
+	cPickle.dump((valid_set_x, valid_set_y), f, protocol=cPickle.HIGHEST_PROTOCOL)
 	f.close()
 
 
 	my_x = []
 	my_y = []
-	for item in test: 
+	for item in test:
 		if item:
 			im = Image.open("skin_data/" + item).convert('L')
 			pixels = list(im.getdata())
@@ -94,19 +94,15 @@ if __name__ == "__main__":
 					pixels2.append(num)
 
 			my_x.append(pixels2)
-			if "mmdermis" in item or "mmdermquest" in item: 
+			if "mmdermis" in item or "mmdermquest" in item:
 				my_y.append([0])
-			else: 
+			else:
 				my_y.append([1])
-	
+
 	test_set_x = theano.shared(numpy.array(my_x, dtype='float64'))
 	test_set_y = theano.shared(numpy.array(my_y, dtype='float64'))
 
 
 	f = file('test_set.pkl', 'wb')
-	    cPickle.dump((test_set_x, test_set_y), f, protocol=cPickle.HIGHEST_PROTOCOL)
+	cPickle.dump((test_set_x, test_set_y), f, protocol=cPickle.HIGHEST_PROTOCOL)
 	f.close()
-
-
-
-
