@@ -15,7 +15,7 @@ from logistic_sgd import LogisticRegression, load_data
 from mlp import HiddenLayer
 
 
-  def predict(model='./testing/model.pkl', 
+def predict(model='./testing/model.pkl', 
             testset='./testing/testset.pkl',
             batch_size=5):
 
