@@ -1,3 +1,20 @@
+from __future__ import print_function
+
+import os
+import sys
+import timeit
+
+import numpy
+
+import theano
+import theano.tensor as T
+from theano.tensor.signal import downsample
+from theano.tensor.nnet import conv2d
+
+from logistic_sgd import LogisticRegression, load_data
+from mlp import HiddenLayer
+
+
   def predict(model='./testing/model.pkl', 
             testset='./testing/testset.pkl',
             batch_size=5):
