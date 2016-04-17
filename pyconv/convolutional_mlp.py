@@ -333,7 +333,7 @@ def evaluate_lenet5(learning_rate=0.1, n_epochs=200,
                 done_looping = True
                 break
 
-    file = open('net.save','wb')
+    file = open('net.pkl','wb')
     for layer in [layer0, layer1, layer2, layer3]
         cPickle.dump(layer, file, protocol = cPickle.HIGHEST_PROTOCOL)
     file.close()
