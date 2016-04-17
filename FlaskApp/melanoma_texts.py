@@ -31,7 +31,7 @@ def reply():
 			extension = '.jpeg'
 		elif mediatype[6:] == 'png':
 			extension = '.png'
-		path = os.path.realpath('../conv/images/') + "/" + str(number) + extension
+		path = os.path.realpath('../pyconv/images/') + "/" + str(number) + extension
 		print(path)
 		resp = twilio.twiml.Response()
 		try:
@@ -41,8 +41,8 @@ def reply():
 					image.raw.decode_content = True
 					copyfileobj(image.raw, f)
 			#sp = subprocess.Popen([os.path.abspath(os.curdir) + "/./conv"])
-			clean.resizeToSquare(path, os.path.abspath('..') + "/conv/images/" + str(number) + extension)
-			result = check_output(['lua','-l','dummy', '-e', 'evalPic("%s")' %(path)], cwd = os.path.abspath('..') + "/conv")
+			clean.resizeToSquare(path, os.path.abspath('..') + "/pyconv/images/" + str(number) + extension)
+			result = check_output(['lua','-l','dummy', '-e', 'evalPic("%s")' %(path)], cwd = os.path.abspath('..') + "/pyconv")
 			send_sms.sendMessage(result, "+" + number)
 			return str(resp)
 		except IOError:
