@@ -14,7 +14,7 @@ def resizeToSquare(path, output):
 	if imgW == imgH:
 		img = img.resize((512,512), PIL.Image.ANTIALIAS)
 		img.save('output' + path)
-		img.convert("LA")
+		img.convert("L")
 		result = np.array(img)
 		result = result.flatten()
 		file = open(os.path.realpath('../pyconv/images/image.pkl'), 'wb')
