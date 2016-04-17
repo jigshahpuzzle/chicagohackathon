@@ -1,6 +1,5 @@
 import cPickle
 
-
 my_x = []
 my_y = []
 with open('path_to_file', 'r') as f:
