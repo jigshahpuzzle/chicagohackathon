@@ -27,13 +27,13 @@ cmd:option('--cuda', true, 'use CUDA')
 cmd:option('--useDevice', 1, 'sets the device (GPU) to use')
 cmd:option('--maxEpoch', 10, 'maximum number of epochs to run')
 cmd:option('--maxTries', 8, 'maximum number of epochs to try to find a better local minima for early-stopping')
-cmd:option('--dataset', 'Mnist', 'which dataset to use : Mnist | NotMnist | Cifar10 | Cifar100 | Svhn | ImageSource')
-cmd:option('--trainPath', '.', 'Where to look for training images')
-cmd:option('--validPath', '.', 'Where to look for validation images')
-cmd:option('--metaPath', '.', 'Where to cache meta data')
+cmd:option('--dataset', 'ImageSource', 'which dataset to use : Mnist | NotMnist | Cifar10 | Cifar100 | Svhn | ImageSource')
+cmd:option('--trainPath', 'skin_data/', 'Where to look for training images')
+cmd:option('--validPath', 'skin_data/validation/', 'Where to look for validation images')
+cmd:option('--metaPath', 'cachoo', 'Where to cache meta data')
 cmd:option('--cacheMode', 'writeonce', 'cache mode of FaceDetection (see SmallImageSource constructor for details)')
-cmd:option('--loadSize', '', 'Image size')
-cmd:option('--sampleSize', '.', 'The size to use for cropped images')
+cmd:option('--loadSize', '3,512,512', 'Image size')
+cmd:option('--sampleSize', '3,512,512', 'The size to use for cropped images')
 cmd:option('--standardize', false, 'apply Standardize preprocessing')
 cmd:option('--zca', false, 'apply Zero-Component Analysis whitening')
 cmd:option('--lecunlcn', false, 'apply Yann LeCun Local Contrast Normalization (recommended)')
@@ -253,9 +253,3 @@ end
 xp:verbose(not opt.silent)
 
 xp:run(ds)
-
-local savefile = string.format('dankoutput')
-print('saving checkpoint to ' .. savefile)
-local checkpoint = {}
-checkpoint.opt = opt
-checkpoint.epoch = opt.maxEpoch
