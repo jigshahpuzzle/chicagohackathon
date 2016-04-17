@@ -9,8 +9,10 @@ from shutil import copyfileobj
 import requests
 import send_sms
 from imp import load_source
+from convolutional_mlp import LeNetConvPoolLayer
+print(os.path.abspath('..') + "/pyconv/predict.py")
 clean = load_source("resize_pics",os.path.abspath('..') + "/pyconv/images/resize_pics.py")
-#cnn = load_source("predict", os.path.abspath('..') + "/pyconv/predict.py")
+cnn = load_source("predict", os.path.abspath('..') + "/pyconv/predict.py")
 
 ACCOUNT_SID = "ACa9cf21438e147f669df6f794d7000122" 
 AUTH_TOKEN = "5e3825edd333abc5fa4e094fba22c989"
@@ -35,21 +37,20 @@ def reply():
 		path = os.path.realpath('../pyconv/images/') + "/" + str(number) + extension
 		print(path)
 		resp = twilio.twiml.Response()
-		try:
-			image = requests.get(url, stream = True)
-			if image.status_code == 200:
-				with open(path, 'wb') as f:
-					image.raw.decode_content = True
-					copyfileobj(image.raw, f)
-			#sp = subprocess.Popen([os.path.abspath(os.curdir) + "/./conv"])
-			clean.resizeToSquare(path, os.path.abspath('..') + "/pyconv/images/" + str(number) + extension)
-			####result = check_output(['lua','-l','dummy', '-e', 'evalPic("%s")' %(path)], cwd = os.path.abspath('..') + "/pyconv")
-			#result = cnn.predict(os.path.abspath(os.curdir) + "/net.pkl", os.path.abspath(os.curdir) + "/images/image.pkl")
-			send_sms.sendMessage(result, "+" + number)
-			return str(resp)
-		except IOError:
-			resp.message("An error occured when processing your image. Please try again")
-			return str(resp)
+		image = requests.get(url, stream = True)
+		if image.status_code == 200:
+			with open(path, 'wb') as f:
+				image.raw.decode_content = True
+				copyfileobj(image.raw, f)
+		#sp = subprocess.Popen([os.path.abspath(os.curdir) + "/./conv"])
+		clean.resizeToSquare(path, os.path.abspath('..') + "/pyconv/images/" + str(number) + extension)
+		####result = check_output(['lua','-l','dummy', '-e', 'evalPic("%s")' %(path)], cwd = os.path.abspath('..') + "/pyconv")
+		result = cnn.predict(os.path.abspath('..') + "/pyconv/net.pkl", os.path.abspath(os.curdir) + "/images/image.pkl")
+		send_sms.sendMessage(result, "+" + number)
+		return str(resp)
+		#except IOError:
+		#	resp.message("An error occured when processing your image. Please try again")
+		#	return str(resp)
 
 
 @app.route("/", methods=['GET', 'POST']) 

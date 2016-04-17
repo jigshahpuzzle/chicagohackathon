@@ -37,7 +37,7 @@ from theano.tensor.nnet import conv2d
 
 from logistic_sgd import LogisticRegression, load_data
 from mlp import HiddenLayer
-import cPickle
+from six.moves import cPickle
 
 
 class LeNetConvPoolLayer(object):
