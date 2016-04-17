@@ -334,8 +334,7 @@ def evaluate_lenet5(learning_rate=0.1, n_epochs=100,
                 break
 
     file = open('net.pkl','wb')
-    for layer in [layer0, layer1, layer2, layer3]:
-        cPickle.dump(layer, file, protocol = cPickle.HIGHEST_PROTOCOL)
+    cPickle.dump([layer0, layer1, layer2, layer3], file, protocol = cPickle.HIGHEST_PROTOCOL)
     file.close()
     end_time = timeit.default_timer()
     print('Optimization complete.')
