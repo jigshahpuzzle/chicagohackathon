@@ -2,6 +2,7 @@ import twilio.twiml
 from twilio.rest import TwilioRestClient
 from flask import Flask, request, redirect, send_from_directory
 from subprocess import check_output
+import subprocess
 from flask import render_template
 import os
 from shutil import copyfileobj
@@ -36,9 +37,9 @@ def reply():
 				with open(path, 'wb') as f:
 					image.raw.decode_content = True
 					copyfileobj(image.raw, f)
-			resp.message("Your image has been received and is being analyzed. You will receive a response shortly.")
-			print("+" + number)
-			send_sms.sendMessage(0.5, "+" + number)
+			#sp = subprocess.Popen([os.path.abspath(os.curdir) + "/./conv"])
+			result = check_output(['lua','-l','dummy', '-e', 'evalPic("%s")' %(path)], cwd = os.path.abspath('..') + "/conv")
+			send_sms.sendMessage(result, "+" + number)
 			return str(resp)
 		except IOError:
 			resp.message("An error occured when processing your image. Please try again")
