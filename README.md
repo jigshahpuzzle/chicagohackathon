@@ -1,5 +1,6 @@
 # chicagohackathon
 Melanoma Detection Neural Net
+Jay Dhanoa, Jigar Shah, Owen Leddy, Warren Mo
 
 Original convolutional neural network code from here: https://github.com/nicholas-leonard/dp/blob/master/examples/convolutionneuralnetwork.lua
 
