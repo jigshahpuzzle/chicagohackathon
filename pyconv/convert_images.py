@@ -36,7 +36,7 @@ if __name__ == "__main__":
 			pixels2 = []
 			for lst in pixels:
 				for num in lst:
-					pixels2.append(num)
+					pixels2.append(float(num))
 
 			my_x.append(pixels2)
 			if "mmdermis" in item or "mmdermquest" in item:
@@ -64,13 +64,16 @@ if __name__ == "__main__":
 			pixels2 = []
 			for lst in pixels:
 				for num in lst:
-					pixels2.append(num)
+					pixels2.append(float(num))
+			print(len(pixels2))
 
 			my_x.append(pixels2)
 			if "mmdermis" in item or "mmdermquest" in item:
 				my_y.append([0])
 			else:
 				my_y.append([1])
+		print(len(my_x))
+		print(len(my_y))
 
 	valid_set_x = theano.shared(numpy.array(my_x, dtype='float64'))
 	valid_set_y = theano.shared(numpy.array(my_y, dtype='float64'))
@@ -91,13 +94,15 @@ if __name__ == "__main__":
 			pixels2 = []
 			for lst in pixels:
 				for num in lst:
-					pixels2.append(num)
+					pixels2.append(float(num))
 
 			my_x.append(pixels2)
 			if "mmdermis" in item or "mmdermquest" in item:
 				my_y.append([0])
 			else:
 				my_y.append([1])
+			print(len(my_x))
+			print(len(my_y))
 
 	test_set_x = theano.shared(numpy.array(my_x, dtype='float64'))
 	test_set_y = theano.shared(numpy.array(my_y, dtype='float64'))
@@ -105,4 +110,7 @@ if __name__ == "__main__":
 
 	f = file('test_set.pkl', 'wb')
 	cPickle.dump((test_set_x, test_set_y), f, protocol=cPickle.HIGHEST_PROTOCOL)
+	f.close()
+	f = file('my_data.pkl', 'wb')
+	cPickle.dump(((train_set_x, train_set_y), (valid_set_x, valid_set_y), (test_set_x, test_set_y)), f, protocol=cPickle.HIGHEST_PROTOCOL)
 	f.close()

@@ -118,8 +118,8 @@ class LeNetConvPoolLayer(object):
         self.input = input
 
 
-def evaluate_lenet5(learning_rate=0.1, n_epochs=300,
-                    dataset='mnist.pkl.gz',
+def evaluate_lenet5(learning_rate=0.1, n_epochs=100,
+                    dataset='my_data.pkl.gz',
                     nkerns=[20, 50], batch_size=500):
     """ Demonstrates lenet on MNIST dataset
 
@@ -347,7 +347,7 @@ def evaluate_lenet5(learning_rate=0.1, n_epochs=300,
            ' ran for %.2fm' % ((end_time - start_time) / 60.)), file=sys.stderr)
 
 if __name__ == '__main__':
-    evaluate_lenet5(n_epochs = 200)
+    evaluate_lenet5(n_epochs = 100)
 
 
 def experiment(state, channel):
