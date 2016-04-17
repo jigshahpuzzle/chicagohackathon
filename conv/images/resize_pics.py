@@ -1,6 +1,8 @@
 # Requires pip install Pillow
 import PIL
 from PIL import Image
+import numpy as np
+from six.moves import cPickle
 
 def resizeToSquare(path, output):
 	print("resizing")
@@ -27,11 +29,18 @@ def resizeToSquare(path, output):
 		img_size = img.size
 
 		new_size = (512, 512)
-		new_im = Image.new("RGB", new_size)  
+		new_im = Image.new("L", new_size)  
 		new_im.paste(img, ((new_size[0]-img_size[0])/2,
 		                      (new_size[1]-img_size[1])/2))
 
 		new_im.save(output)
+		result = np.array(new_im)
+		result = result.flatten()
+		file = open('image.pkl')
+		cPickle.dump(result)
+		file.close()
+
+
 
 if __name__ == "__main__":
 	pathlist = []
