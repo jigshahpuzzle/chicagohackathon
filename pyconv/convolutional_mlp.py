@@ -118,7 +118,7 @@ class LeNetConvPoolLayer(object):
         self.input = input
 
 
-def evaluate_lenet5(learning_rate=0.1, n_epochs=200,
+def evaluate_lenet5(learning_rate=0.1, n_epochs=300,
                     dataset='mnist.pkl.gz',
                     nkerns=[20, 50], batch_size=500):
     """ Demonstrates lenet on MNIST dataset
@@ -267,7 +267,7 @@ def evaluate_lenet5(learning_rate=0.1, n_epochs=200,
     ###############
     print('... training')
     # early-stopping parameters
-    patience = 1000  # look as this many examples regardless
+    patience = 10000  # look as this many examples regardless
     patience_increase = 2  # wait this much longer when a new best is
                            # found
     improvement_threshold = 0.995  # a relative improvement of this much is
@@ -334,7 +334,7 @@ def evaluate_lenet5(learning_rate=0.1, n_epochs=200,
                 break
 
     file = open('net.pkl','wb')
-    for layer in [layer0, layer1, layer2, layer3]
+    for layer in [layer0, layer1, layer2, layer3]:
         cPickle.dump(layer, file, protocol = cPickle.HIGHEST_PROTOCOL)
     file.close()
     end_time = timeit.default_timer()
@@ -347,7 +347,7 @@ def evaluate_lenet5(learning_rate=0.1, n_epochs=200,
            ' ran for %.2fm' % ((end_time - start_time) / 60.)), file=sys.stderr)
 
 if __name__ == '__main__':
-    evaluate_lenet5(n_epochs = 1)
+    evaluate_lenet5(n_epochs = 200)
 
 
 def experiment(state, channel):

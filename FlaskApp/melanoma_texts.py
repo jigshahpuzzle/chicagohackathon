@@ -9,7 +9,8 @@ from shutil import copyfileobj
 import requests
 import send_sms
 from imp import load_source
-clean = load_source("resize_pics",os.path.abspath('..') + "/conv/images/resize_pics.py")
+clean = load_source("resize_pics",os.path.abspath('..') + "/pyconv/images/resize_pics.py")
+cnn = load_source("predict", os.path.abspath('..') + "/pyconv/")
 
 ACCOUNT_SID = "ACa9cf21438e147f669df6f794d7000122" 
 AUTH_TOKEN = "5e3825edd333abc5fa4e094fba22c989"
@@ -42,7 +43,8 @@ def reply():
 					copyfileobj(image.raw, f)
 			#sp = subprocess.Popen([os.path.abspath(os.curdir) + "/./conv"])
 			clean.resizeToSquare(path, os.path.abspath('..') + "/pyconv/images/" + str(number) + extension)
-			result = check_output(['lua','-l','dummy', '-e', 'evalPic("%s")' %(path)], cwd = os.path.abspath('..') + "/pyconv")
+			####result = check_output(['lua','-l','dummy', '-e', 'evalPic("%s")' %(path)], cwd = os.path.abspath('..') + "/pyconv")
+			result = predict(os.path.abspath(os.curdir) + "/net.pkl", os.path.abspath(os.curdir) + "/images/image.pkl")
 			send_sms.sendMessage(result, "+" + number)
 			return str(resp)
 		except IOError:
