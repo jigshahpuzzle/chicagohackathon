@@ -37,6 +37,7 @@ from theano.tensor.nnet import conv2d
 
 from logistic_sgd import LogisticRegression, load_data
 from mlp import HiddenLayer
+from six.moves import cPickle
 
 
 class LeNetConvPoolLayer(object):
@@ -266,7 +267,7 @@ def evaluate_lenet5(learning_rate=0.1, n_epochs=200,
     ###############
     print('... training')
     # early-stopping parameters
-    patience = 10000  # look as this many examples regardless
+    patience = 1000  # look as this many examples regardless
     patience_increase = 2  # wait this much longer when a new best is
                            # found
     improvement_threshold = 0.995  # a relative improvement of this much is
@@ -332,6 +333,10 @@ def evaluate_lenet5(learning_rate=0.1, n_epochs=200,
                 done_looping = True
                 break
 
+    file = open('net.save','wb')
+    for layer in [layer0, layer1, layer2, layer3]
+        cPickle.dump(layer, file, protocol = cPickle.HIGHEST_PROTOCOL)
+    file.close()
     end_time = timeit.default_timer()
     print('Optimization complete.')
     print('Best validation score of %f %% obtained at iteration %i, '
@@ -342,7 +347,7 @@ def evaluate_lenet5(learning_rate=0.1, n_epochs=200,
            ' ran for %.2fm' % ((end_time - start_time) / 60.)), file=sys.stderr)
 
 if __name__ == '__main__':
-    evaluate_lenet5()
+    evaluate_lenet5(n_epochs = 1)
 
 
 def experiment(state, channel):
