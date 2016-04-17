@@ -1,0 +1,22 @@
+Note: Theanorc file written to be configured for a build with Nvidia driver 352.63/CUDA version 7.5 on Ubuntu 14.04, computations performed with an i7 4770HQ/GTX 980M (configured to be gpu0) on an Asus G751JY-DH71.
+
+.theanorc file stored in $HOME (~/) directory
+
+--begin .theanorc file--
+
+[global]
+floatX = float32
+device = gpu0
+
+[lib]
+cnmem = 3000
+
+[cuda]
+root = /usr/local/cuda-7.5
+
+--end .theanorc file--
+
+Additionally, the ~/.bashrc file had the following line added to it:
+    $LD_LIBRARY_PATH = /usr/local/cuda/lib64/
+
+Note that, for the duration of this line in the ~/.bashrc file, it will disable torch.
