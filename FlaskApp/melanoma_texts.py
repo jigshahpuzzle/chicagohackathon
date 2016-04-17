@@ -44,8 +44,7 @@ def reply():
 			#sp = subprocess.Popen([os.path.abspath(os.curdir) + "/./conv"])
 			clean.resizeToSquare(path, os.path.abspath('..') + "/pyconv/images/" + str(number) + extension)
 			####result = check_output(['lua','-l','dummy', '-e', 'evalPic("%s")' %(path)], cwd = os.path.abspath('..') + "/pyconv")
-			#result = predict(os.path.abspath(os.curdir) + "/net.pkl", os.path.abspath(os.curdir) + "/images/image.pkl")
-			result = 0.5
+			result = predict(os.path.abspath(os.curdir) + "/net.pkl", os.path.abspath(os.curdir) + "/images/image.pkl")
 			send_sms.sendMessage(result, "+" + number)
 			return str(resp)
 		except IOError:
